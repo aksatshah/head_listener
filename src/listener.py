@@ -28,11 +28,11 @@ def callback(data):
 	head_tf = tf.TransformBroadcaster()
 	# quaternion = quaternion_from_euler(data.roll,data.pitch,data.yaw)
 	#(data.x_center/1000.0,data.y_center/1000.0,data.z_center/1000.0)
-	head_tf.sendTransform((data.y_center/1000.0,-data.x_center/1000.0,data.z_center/1000.0),
+	head_tf.sendTransform((data.x_center/1000.0,-data.y_center/1000.0,data.z_center/1000.0),
 		quaternion_from_euler(0,data.pitch,math.pi+data.yaw), #roll,pitch,yaw
 		rospy.Time.now(),
 		"head_pose",
-		"camera")
+		"xtion")
 	rospy.loginfo("Time to move!")
 	#print(data)
 

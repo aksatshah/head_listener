@@ -1,0 +1,23 @@
+<package>
+  <description brief="aksat_navigation">
+
+     aksat_navigation
+
+  </description>
+  <author>haroldsoh</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/aksat_navigation</url>
+  <depend package="move_base"/>
+  <depend package="skippi"/>
+  <depend package="skippi_setup_tf"/>
+  <depend package="phidget_spatial"/>
+  <depend package="hokuyo_node"/>
+  <depend package="arty_localize"/>
+  <depend package="arty_lasers"/>
+  <depend package="obstacle_avoidance"/>
+  <depend package="arty_simple_odometry_wgyro"/>
+
+</package>
+
+

@@ -1,0 +1,6 @@
+global_costmap:
+  # global_frame: /arty/base_link
+  global_frame: /arty/SkippiOdomoetry
+  robot_base_frame: /arty/base_link
+  update_frequency: 5.0
+  static_map: true

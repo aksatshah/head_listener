@@ -16,7 +16,10 @@
 	<node pkg="head_listener" name="head_listener" type="listener.py" />
 
 	<!-- Launch rviz -->
-	<node pkg="rviz" name="rviz" type="rviz"/>
+<!-- 	<node pkg="rviz" name="rviz" type="rviz"/> -->
+
+	<!-- Launch goal finder -->
+<!-- 	<node pkg="goal_finder" name="goal_finder" type="goal_finder.py" /> -->
 
 </launch>
 

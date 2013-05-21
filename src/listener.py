@@ -33,7 +33,7 @@ def callback(data):
 		rospy.Time.now(),
 		"head_pose",
 		"xtion")
-	rospy.loginfo("Time to move!")
+	#rospy.loginfo("Time to move!")
 	#print(data)
 
 

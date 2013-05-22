@@ -7,7 +7,7 @@
 
 	<!-- Launch wheelchair tf -->
 	<!-- The below coords are found by looking straight ahead! dont forget this!! -->
-	<node pkg="tf" type="static_transform_publisher" name="wheelchair_broadcaster" args="1 0 0.66 3.1416 -0.6 0 base_link xtion 100" />
+	<node pkg="tf" type="static_transform_publisher" name="wheelchair_broadcaster" args="1 0 0.66 3.1416 -0.6 0 base_link xtion 10" />
 
 	<!-- Launch head_pose_estimation-->
 	<node pkg="head_pose" name="demo_head_pose_estimation" type="demo_head_pose_estimation" args="$(find head_pose)/src/config.txt"/>

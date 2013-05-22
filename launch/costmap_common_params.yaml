@@ -11,5 +11,5 @@ observation_sources: laser_scan_sensor
 
 laser_scan_sensor: {sensor_frame: /arty/base_link, data_type: LaserScan, topic: /arty/base_scan, marking: true, clearing: true}
 
-transform_tolerance: 4.0
+transform_tolerance: 5.0
 # cost_scaling_frame: 10.0

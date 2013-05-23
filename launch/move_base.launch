@@ -14,13 +14,13 @@
   <node pkg="tf" type="static_transform_publisher" name="odom_transformer" args="0 0 0 0 0 0 /arty/base_link arty/SkippiOdometry 10" />
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-      <!-- <param name="base_global_planner" value="carrot_planner/CarrotPlanner"/> -->
+      <param name="base_global_planner" value="carrot_planner/CarrotPlanner"/>
       <rosparam file="$(find head_listener)/launch/costmap_common_params.yaml" command="load" ns="global_costmap" />
       <rosparam file="$(find head_listener)/launch/costmap_common_params.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find head_listener)/launch/local_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/global_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/base_local_planner_params.yaml" command="load" />
-      <remap from="/arty/cmd_vel" to="/fuckerrrr"/>
+<!--       <remap from="/arty/cmd_vel" to="/fuckerrrr"/> -->
 <!--       <remap from="/arty/map" to="/map"/> -->
 <!--        <remap from="/arty/odom" to="/arty/SkippiOdometry"/> -->
     </node>

@@ -1,10 +1,13 @@
 <launch>
+  <group ns="arty" >
 	<master auto="start" />
-	<node pkg="stage" name="stageros" type="stageros" args="$(find arty_localize)/maps/miguel.world"/>
+	<node pkg="stage" name="stageros" type="stageros" args="$(find head_listener)/maps/miguel.world"/>
 
   	<param name="/use_sim_time" value="true"/>
 
     <node pkg="tf" type="static_transform_publisher" name="base_link_transformer" args="0 0 0 0 0 0 base_link arty/base_link 10" />
+
+    <node pkg="tf" type="static_transform_publisher" name="map_transformer" args="0 0 0 0 0 0 map odom 10" />
 
   	<!-- Run Gmapping -->
 <!--     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
@@ -41,7 +44,7 @@
     </node> -->
 
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find arty_localize)/maps/miguel.yaml" required="true"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find head_listener)/maps/miguel.yaml" required="true"/>
         
   <!-- Run the AMCL node -->
   <node pkg="amcl" type="amcl" name="amcl" args="scan:=amcl_scan" output="screen" required="true" >
@@ -81,8 +84,8 @@
 	<!--Run Move base-->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<param name="base_global_planner" value="carrot_planner/CarrotPlanner"/>
-      <rosparam file="$(find head_listener)/launch/costmap_common_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find head_listener)/launch/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find head_listener)/launch/costmap_common_params_sim.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find head_listener)/launch/costmap_common_params_sim.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find head_listener)/launch/local_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/global_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/base_local_planner_params.yaml" command="load" />
@@ -90,5 +93,5 @@
 
 	<!-- Run rviz -->
 	<node pkg="rviz" type="rviz" name="rviz"/>
-
+  </group>
 </launch>

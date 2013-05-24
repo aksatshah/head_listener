@@ -1,14 +1,6 @@
 <launch>
   <group ns="arty" >
 
-<!--   Run the map server -->
-<!--     <node name="map_server" pkg="map_server" type="map_server" args="$(find arty_localize)/maps/miguel.yaml" required="true">
- --><!--       <remap from="/arty/map" to="/map"/> -->
-<!--     </node> -->
-
-<!--   - Run AMCL  -->
-<!--   <include file="$(find amcl)/examples/amcl_omni.launch" /> -->
-
   <node pkg="tf" type="static_transform_publisher" name="base_link_transformer" args="0 0 0 0 0 0 base_link arty/base_link 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="odom_transformer" args="0 0 0 0 0 0 /arty/base_link arty/SkippiOdometry 10" />

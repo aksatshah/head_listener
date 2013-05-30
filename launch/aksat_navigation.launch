@@ -50,9 +50,9 @@
 
   <group ns="arty">
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-      <remap from="scan" to="/arty/base_scan"/>
+      <remap from="scan" to="/arty/amcl_scan"/>
       <param name="odom_frame" value="odom"/>
-      <param name="map_update_interval" value="5.0"/>
+      <param name="map_update_interval" value="3.0"/>
       <param name="maxUrange" value="16.0"/>
       <param name="sigma" value="0.05"/>
       <param name="kernelSize" value="1"/>

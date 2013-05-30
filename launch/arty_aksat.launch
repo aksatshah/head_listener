@@ -73,7 +73,7 @@
 =============================================================================-->
     <group ns="arty" if="$(arg amcl)">
         <!-- Run the map server -->
-        <node name="map_server" pkg="map_server" type="map_server" args="$(find arty_localize)/maps/miguel.yaml" required="true"/>
+<!--        <node name="map_server" pkg="map_server" type="map_server" args="$(find arty_localize)/maps/miguel.yaml" required="true"/>-->
             
         <!-- Run the AMCL node -->
         <node pkg="amcl" type="amcl" name="amcl" args="scan:=amcl_scan" output="screen" required="true" >

@@ -1,8 +1,13 @@
 <launch>
+  <group ns="arty" >
 	<master auto="start" />
-	<node pkg="stage" name="stageros" type="stageros" args="$(find robot_launch)/world/miguel.world"/>
+	<node pkg="stage" name="stageros" type="stageros" args="$(find head_listener)/maps/miguel.world"/>
 
   	<param name="/use_sim_time" value="true"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="base_link_transformer" args="0 0 0 0 0 0 base_link arty/base_link 10" />
+
+    <node pkg="tf" type="static_transform_publisher" name="map_transformer" args="0 0 0 0 0 0 map odom 10" />
 
   	<!-- Run Gmapping -->
 <!--     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
@@ -38,23 +43,55 @@
       <param name="lasamplestep" value="0.005"/>
     </node> -->
 
-	<!--Run AMCL-->
-	<include file="$(find robot_launch)/launch/amcl/amcl_diff.launch" />
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find head_listener)/maps/miguel.yaml" required="true"/>
+        
+  <!-- Run the AMCL node -->
+  <node pkg="amcl" type="amcl" name="amcl" args="scan:=amcl_scan" output="screen" required="true" >
+    <!-- Publish scans from best pose at a max of 10 Hz -->
+    <param name="odom_model_type" value="diff"/>
+    <param name="odom_alpha5" value="0.1"/>
+    <param name="transform_tolerance" value="0.2" />
+    <param name="gui_publish_rate" value="10.0"/>
+    <param name="laser_max_beams" value="30"/>
+    <param name="min_particles" value="500"/>
+    <param name="max_particles" value="5000"/>
+    <param name="kld_err" value="0.05"/>
+    <param name="kld_z" value="0.99"/>
+    <param name="odom_alpha1" value="0.2"/>
+    <param name="odom_alpha2" value="0.2"/>
+    <!-- translation std dev, m -->
+    <param name="odom_alpha3" value="0.8"/>
+    <param name="odom_alpha4" value="0.2"/>
+    <param name="laser_z_hit" value="0.5"/>
+    <param name="laser_z_short" value="0.05"/>
+    <param name="laser_z_max" value="0.05"/>
+    <param name="laser_z_rand" value="0.5"/>
+    <param name="laser_sigma_hit" value="0.2"/>
+    <param name="laser_lambda_short" value="0.1"/>
+    <param name="laser_lambda_short" value="0.1"/>
+    <param name="laser_model_type" value="likelihood_field"/>
+    <param name="laser_likelihood_max_dist" value="2.0"/>
+    <param name="update_min_d" value="0.2"/>
+    <param name="update_min_a" value="0.5"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="resample_interval" value="1"/>
+    <param name="transform_tolerance" value="0.1"/>
+    <param name="recovery_alpha_slow" value="0.0"/>
+    <param name="recovery_alpha_fast" value="0.0"/>
+  </node>
 
 	<!--Run Move base-->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<param name="base_global_planner" value="carrot_planner/CarrotPlanner"/>
-      <rosparam file="$(find head_listener)/launch/costmap_common_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find head_listener)/launch/costmap_common_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find head_listener)/launch/costmap_common_params_sim.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find head_listener)/launch/costmap_common_params_sim.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find head_listener)/launch/local_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/global_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/base_local_planner_params.yaml" command="load" />
 	</node>
 
-	<!-- Run Map Server -->
-	<node pkg="map_server" type="map_server" name="map_server" args="$(find head_listener)/maps/aksat_empty_map.pgm"/>
-
 	<!-- Run rviz -->
 	<node pkg="rviz" type="rviz" name="rviz"/>
-
+  </group>
 </launch>

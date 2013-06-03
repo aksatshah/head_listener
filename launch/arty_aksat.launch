@@ -3,7 +3,7 @@
 <!--============================================================================
     SET UP ARGUMENTS
 =============================================================================-->
-    <arg name="amcl" default="true" />
+    <arg name="amcl" default="false" />
     <arg name="fake_odom" default="true"/>
     <arg name="speed" default="0.7"/>
 

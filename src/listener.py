@@ -11,13 +11,16 @@ from tf.transformations import *
 def converter(pub,data):
 	move = Twist()
 	if (data.pitch > 0.15) and (data.pitch < 1.0): #looking down
-		move.linear.x = 1.0
-	if (data.pitch < -0.4) and (data.pitch > -1.0): #looking up
-		move.linear.x = -1.0
-	if (data.yaw > 0.4) and (data.yaw < 1.0): #looking left
-		move.angular.z = 1.0
-	if (data.yaw < -0.4) and (data.yaw > -1.0): #looking right
-		move.angular.z = -1.0
+		move.linear.x = 0.5
+	elif (data.pitch < -0.4) and (data.pitch > -1.0): #looking up
+		move.linear.x = -0.5
+	elif (data.yaw > 0.4) and (data.yaw < 1.0): #looking left
+		move.angular.z = 0.5
+	elif (data.yaw < -0.4) and (data.yaw > -1.0): #looking right
+		move.angular.z = -0.5
+	else:
+		move.linear.x = 0.0
+		move.angular.z = 0.0
 	print(move)
 	pub.publish(move)
 

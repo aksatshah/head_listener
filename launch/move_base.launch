@@ -12,7 +12,6 @@
       <rosparam file="$(find head_listener)/launch/local_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/global_costmap_params.yaml" command="load" />
       <rosparam file="$(find head_listener)/launch/base_local_planner_params.yaml" command="load" />
-<!--       <remap from="/arty/cmd_vel" to="/fuckerrrr"/> -->
 <!--       <remap from="/arty/map" to="/map"/> -->
 <!--        <remap from="/arty/odom" to="/arty/SkippiOdometry"/> -->
     </node>
